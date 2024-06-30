@@ -60,10 +60,6 @@ def softmax(x):
     exp_x = np.round(exp_x*100, 2)
     return exp_x
 
-# model_path = './weights/best_model.onnx'
-# sess = ort.InferenceSession(model_path, providers=['CUDAExecutionProvider', 'CPUExecutionProvider'])
-# input_names = [i.name for i in sess.get_inputs()]
-# input_shape = sess.get_inputs()[0].shape
 
 def main(args):
     if args.onnx_path == "":
@@ -80,7 +76,7 @@ def main(args):
         print("The input image is corrupted. Please try another image")
     else:
         image = crop_face(img_path)[1]
-        transformed_image = transform(image, args.img_size)
+        transformed_image = transform(image, input_shape[2])
         input_tensor = transformed_image.reshape(input_shape).cpu().numpy()
         outputs = sess.run(None, {input_names[0]: input_tensor, input_names[1]: input_tensor})
         outputs = softmax(outputs[1][0])

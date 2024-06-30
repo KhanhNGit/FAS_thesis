@@ -1,4 +1,5 @@
 import torch
+import torch.nn as nn
 import sys
 from networks import *
 from configs import parse_args_convert
@@ -13,6 +14,7 @@ def main(args):
         sys.exit()
     
     model = get_model()
+    model = nn.DataParallel(model)
     model.load_state_dict(torch.load(args.pth_path)['state_dict'])
     model.to('cuda')
     model.eval()

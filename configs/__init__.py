@@ -13,7 +13,7 @@ def parse_args():
     parser.add_argument('--loo_domain', type=str, default="", help='leave_one_out domain name')
     parser.add_argument('--base_lr', type=float, default=5e-4, help='base learning rate')
     parser.add_argument('--num_epochs', type=int, default=200, help='total training epochs')
-    parser.add_argument('--print_freq', type=int, default=50, help='print frequency')
+    parser.add_argument('--print_freq', type=int, default=20, help='print frequency')
     parser.add_argument('--trans', type=str, default="I", help="different pre-process")
     parser.add_argument('--lambda_contrast', type=float, default=0.4, help='weight contrast loss')
     parser.add_argument('--lambda_supcon', type=float, default=0.1, help='weight supcon loss')
@@ -28,8 +28,7 @@ def parse_args():
 def parse_args_pred():
     parser = argparse.ArgumentParser()
     parser.add_argument('--onnx_path', type=str, default="", help='.onnx model path')
-    parser.add_argument('--img_size', type=int, default=256, help='img size')
-    parser.add_argument('--image_name', type=str, default="live.jpg", help='image name in images folder')
+    parser.add_argument('--img_name', type=str, default="live.jpg", help='image name in images folder')
     return parser.parse_args()
 
 def parse_args_convert():
@@ -38,4 +37,4 @@ def parse_args_convert():
     parser.add_argument('--onnx_path', type=str, default="", help='.onnx model path')
     parser.add_argument('--opset_ver', type=int, default=12, help='onnx opset version')
     parser.add_argument('--img_size', type=int, default=256, help='img size')
-    
+    return parser.parse_args()
